@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  role_name: ad_constrained_delegation
+  author: xbufu
+  description: AD constrained delegation role.
+  company: Bufu-Security
+  license: license (BSD, MIT)
+  min_ansible_version: "2.1"
+  platforms:
+    - name: Windows
+      versions: all
+
+  galaxy_tags:
+    - windows
+    - ad
+    - vulnerable_domain
+    - constrained
+    - delegation

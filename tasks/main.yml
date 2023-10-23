@@ -1,0 +1,20 @@
+---
+- name: Get all domain computers
+  ansible.windows.win_powershell:
+    script: |
+      Get-ADComputer -Filter * | Select -Exp Name
+  register: computers_result
+
+- name: Parse the computer result to a list
+  ansible.builtin.set_fact:
+    domain_computers: "{{ computers_result.output | list }}"
+
+- name: Get {{ num_delegation_computers }} random computers
+  ansible.builtin.set_fact:
+    constrained_computers: "{{ (domain_computers | shuffle)[:num_delegation_computers] }}"
+
+- name: Enable delegation on computers
+  ansible.builtin.include_tasks: enable_delegation.yml
+  loop: '{{ constrained_computers }}'
+  loop_control:
+    loop_var: target_computer
