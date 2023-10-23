@@ -1,5 +1,5 @@
 ---
-- name: Enable delegation to on {{ target_computer }} 
+- name: Enable delegation to on {{ target_computer }}
   ansible.windows.win_powershell:
     script: |
       Set-ADComputer -Identity {{ target_computer }} -Add @{'msDS-AllowedToDelegateTo'='{{ spn }}'}
